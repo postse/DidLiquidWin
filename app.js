@@ -1,11 +1,11 @@
 const express = require("express");
 const fetch = require("node-fetch");
 const app = express();
+let data, lastRequested;
 
 app.use(express.static("static"));
 
 app.get('/data', async (req, res) => {
-    let data, lastRequested;
     // console.log(await getData());
 
     async function getData() {

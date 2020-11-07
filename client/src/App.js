@@ -11,9 +11,8 @@ class App extends Component {
 
   async componentDidMount() {
     axios.get('/data').then((res) => {
-      const response = res.data;
-      this.setState({response});
-    });
+      this.setState(res.data.result[0])
+    })
   }
 
   render() {
@@ -31,8 +30,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            YES
-            
+            {this.state.opponent2}
           </a>
         </header>
       </div>
