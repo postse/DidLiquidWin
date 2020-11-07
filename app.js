@@ -27,7 +27,6 @@ app.listen(8080, function () {
 async function callAPI() {
     const response = await fetch('https://api.liquipedia.net/api/v1/match', {
         method: 'post',
-        // body: JSON.stringify(body),
         body: 'apikey=2q0cobTlhOD0kr474KCTEAUFQF34H6nxpXu8H04HoOyCVslD8Zosb7ZZo5u7Uv7UiWudTF7Avx0Rclo5zKjzafZoqXdz5dyYhul0WzCSvJYEZRdfJ2rSggB8yCPZWfSu&wiki=counterstrike',
         headers: {
             'User-Agent': 'DidLiquidWin project for LiquidHacks',
@@ -35,7 +34,6 @@ async function callAPI() {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     });
-    console.log(response);
     const json = await response.json();
     return json;
 }
