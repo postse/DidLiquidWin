@@ -25,19 +25,17 @@ app.listen(8080, function () {
 });
 
 async function callAPI() {
-    const body = {
-        apikey: '2Rm5zmfrhX3Tu7hzdnNMAu2GmUGsQsoCTJPNG6hXNpt4PzLSlR9r0vPnDxG2jO7IASy4cuHCLUroVTPzpxUfTlsbNuMOCZ3GQ5mXGysN8zebR1s1n8WvnTMydr2JbIte',
-        wiki: 'counterstrike'
-    };
     const response = await fetch('https://api.liquipedia.net/api/v1/match', {
         method: 'post',
-        body: JSON.stringify(body),
+        // body: JSON.stringify(body),
+        body: 'apikey=2q0cobTlhOD0kr474KCTEAUFQF34H6nxpXu8H04HoOyCVslD8Zosb7ZZo5u7Uv7UiWudTF7Avx0Rclo5zKjzafZoqXdz5dyYhul0WzCSvJYEZRdfJ2rSggB8yCPZWfSu&wiki=counterstrike',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
             'User-Agent': 'DidLiquidWin project for LiquidHacks',
-            'Accept-Encoding': 'gzip'
+            'Accept-Encoding': 'gzip',
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     });
+    console.log(response);
     const json = await response.json();
     return json;
 }
