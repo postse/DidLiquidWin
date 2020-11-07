@@ -6,7 +6,7 @@ app.use(express.static("static"));
 
 app.get('/data', async (req, res) => {
     let data, lastRequested;
-    console.log(await getData());
+    // console.log(await getData());
 
     async function getData() {
       if (!data || !lastRequested || (new Date().getTime() - lastRequested.getTime()) > 30000) {
@@ -17,6 +17,9 @@ app.get('/data', async (req, res) => {
       }
       return data;
     }
+
+    let response = await getData()
+    res.send(response)
 });
 
 app.listen(8080, function () {
@@ -25,9 +28,15 @@ app.listen(8080, function () {
 });
 
 async function callAPI() {
-    const response = await fetch('https://api.liquipedia.net/api/v1/matchfeed', {
+    const response = await fetch('https://api.liquipedia.net/api/v1/match', {
         method: 'post',
-        body: `apikey=4jI9yKlutNoZZskUvyDPeAm5mVWNHIN6SZn84ouI7l8UPdl1djD6YdYBd2771uuIId0EqMkiSliAfeYJ4mskk1iREbSqpDJ6uCRExFO111vHAbKzYXSLY7ur8qR5o61t&wiki=counterstrike&type=team&name=Team Liquid&order=date DESC&limit=1`,
+        body: 'apikey=4h3fs3WXhI7Z5hpIS1J9qx99AxUeKnabiZsBeCO0uOzyRDXXd8gAohZOxMueMlZ6hGxqmYOJ2mUmGcEFG2idR50n2uBCXpIJu4usbytzBFLQC3AqK5955EedR4W45FPu' + 
+        '&wiki=counterstrike'+
+        '&type=team'+
+        '&conditions=[[finished::1]]AND([[opponent1::Team Liquid]]OR[[opponent2::Team Liquid]])'+
+        '&query=opponent1,opponent2,opponent1score,opponent2score,winner, date, tournament'+
+        '&order=date DESC'+
+        '&limit=1',
         headers: {
             'User-Agent': 'DidLiquidWin project for LiquidHacks',
             'Accept-Encoding': 'gzip',
