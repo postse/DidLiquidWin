@@ -25,9 +25,9 @@ app.listen(8080, function () {
 });
 
 async function callAPI() {
-    const response = await fetch('https://api.liquipedia.net/api/v1/match', {
+    const response = await fetch('https://api.liquipedia.net/api/v1/matchfeed', {
         method: 'post',
-        body: 'apikey=2q0cobTlhOD0kr474KCTEAUFQF34H6nxpXu8H04HoOyCVslD8Zosb7ZZo5u7Uv7UiWudTF7Avx0Rclo5zKjzafZoqXdz5dyYhul0WzCSvJYEZRdfJ2rSggB8yCPZWfSu&wiki=counterstrike',
+        body: `apikey=4jI9yKlutNoZZskUvyDPeAm5mVWNHIN6SZn84ouI7l8UPdl1djD6YdYBd2771uuIId0EqMkiSliAfeYJ4mskk1iREbSqpDJ6uCRExFO111vHAbKzYXSLY7ur8qR5o61t&wiki=counterstrike&type=team&name=Team Liquid&order=date DESC&limit=1`,
         headers: {
             'User-Agent': 'DidLiquidWin project for LiquidHacks',
             'Accept-Encoding': 'gzip',
