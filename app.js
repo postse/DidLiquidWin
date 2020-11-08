@@ -1,7 +1,7 @@
 const express = require("express");
 const fetch = require("node-fetch");
 const app = express();
-let data, lastRequested;
+let data, lastRequested, lastgame;
 
 app.use(express.static("static"));
 
@@ -9,16 +9,20 @@ app.get('/data/:game', async (req, res) => {
     let game = req.params.game;
 
     async function getData() {
-      if (!data || !lastRequested || (new Date().getTime() - lastRequested.getTime()) > 30000) {
+        // if (game === lastgame) {
+        //     console.log("same game requested");
+        // }
+    //   else if (!data || !lastRequested || (new Date().getTime() - lastRequested.getTime()) > 30000) {
         data = await callAPI(game);
-        lastRequested = new Date();
-      } else {
-          console.log("Already updated within last 5 minutes")
-      }
+        //lastRequested = new Date();
+    //   } else {
+    //       console.log("Already updated within last 5 minutes")
+    //   }
       return data;
     }
 
     let response = await getData()
+    console.log(response)
     res.send(response)
 });
 
@@ -34,7 +38,7 @@ async function callAPI(game) {
         '&wiki='+game+
         '&type=team'+
         '&conditions=[[finished::1]]AND([[opponent1::Team Liquid]]OR[[opponent2::Team Liquid]])'+
-        '&query=opponent1,opponent2,opponent1score,opponent2score,winner, date, tournament'+
+        '&query=opponent1,opponent2,opponent1score,opponent2score,winner, date, tournament, pagename'+
         '&order=date DESC'+
         '&limit=1',
         headers: {
@@ -44,5 +48,8 @@ async function callAPI(game) {
         }
     });
     const json = await response.json();
+    if (json.result[0] != null) {
+        json.result[0].link = "https://liquipedia.net/" + json.result[0].wiki + "/" + json.result[0].pagename;
+    }
     return json;
 }
