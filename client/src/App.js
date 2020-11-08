@@ -29,8 +29,7 @@ const MyButton = styled(Button)({
   top: '-30px',
 });
 
-let game;
-let newstate;
+let game, newstate, dash;
 
 class App extends Component {
   state = {
@@ -51,6 +50,7 @@ class App extends Component {
   render() {
     let status;
     if (this.state.opponent1 === "Team Liquid") {
+      dash = "-";
       if (this.state.opponent1score > this.state.opponent2score) {
         status = "YES";
       }
@@ -59,13 +59,19 @@ class App extends Component {
       }
     }
 
-    else {
+    else if (this.state.opponent2 === "Team Liquid") {
+      dash = "-";
       if (this.state.opponent2score > this.state.opponent1score) {
         status = "YES";
       }
       else {
         status = "NO";
       }
+    }
+
+    else {
+      status = "";
+      dash = "";
     }
 
     return (
@@ -94,7 +100,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {this.state.opponent1} {this.state.opponent1score}-{this.state.opponent2score} {this.state.opponent2}
+            {this.state.opponent1} {this.state.opponent1score}{dash}{this.state.opponent2score} {this.state.opponent2}
           </a>
         </header>
       </div>
