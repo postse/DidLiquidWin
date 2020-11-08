@@ -10,7 +10,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    axios.get('/data').then((res) => {
+    axios.get('/data/counterstrike').then((res) => {
       this.setState(res.data.result[0])
     })
   }
