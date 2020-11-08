@@ -39,4 +39,6 @@
 
 .won {
   font-size: 100px;
+  position: relative;
+  top: -20px;
 }

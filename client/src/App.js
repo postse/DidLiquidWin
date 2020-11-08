@@ -25,7 +25,12 @@ const MyButton = styled(Button)({
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
   ].join(','),
+  position: 'relative',
+  top: '-30px',
 });
+
+let game;
+let newstate;
 
 class App extends Component {
   state = {
@@ -33,14 +38,17 @@ class App extends Component {
 
   };
 
-  async componentDidMount() {
-    axios.get('/data').then((res) => {
-      this.setState(res.data.result[0])
+  async componentDidMount(game) {
+    axios.get('/data/' + game ).then((res) => {
+      newstate = res.data.result[0]
+      this.setState(newstate)
+      //this.state.link = "https://liquipedia.net/" + this.state.wiki + "/" + this.state.pagename;
+      console.log(this.state)
     })
+    //eventLink = "https://liquipedia.net/" + this.state.wiki + "/" + this.state.pagename;
   }
 
   render() {
-
     let status;
     if (this.state.opponent1 === "Team Liquid") {
       if (this.state.opponent1score > this.state.opponent2score) {
@@ -64,25 +72,25 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Toolbar>
-            <MyButton variant="contained" onClick={() => { alert('Dota 2 clicked') }}>Dota 2</MyButton>
-            <MyButton variant="contained" onClick={() => { alert('CS:GO clicked') }}>CS:GO</MyButton>
-            <MyButton variant="contained" onClick={() => { alert('PUBG clicked') }}>PUBG</MyButton>
-            <MyButton variant="contained" onClick={() => { alert('SC2 clicked') }}>SC2</MyButton>
-            <MyButton variant="contained" onClick={() => { alert('Rocket League clicked') }}>Rocket League</MyButton>
-            <MyButton variant="contained" onClick={() => { alert('Valorant clicked') }}>Valorant</MyButton>
-            <MyButton variant="contained" onClick={() => { alert('R6S clicked') }}>R6S</MyButton>
-            <MyButton variant="contained" onClick={() => { alert('Apex Legends clicked') }}>Apex Legends</MyButton>
-            <MyButton variant="contained" onClick={() => { alert('LoL clicked') }}>LoL</MyButton>
+            <MyButton variant="contained" onClick={() => { this.componentDidMount("dota2"); game = "Dota 2";}}>Dota 2</MyButton>
+            <MyButton variant="contained" onClick={() => { this.componentDidMount("counterstrike"); game = "CS:GO"; }}>CS:GO</MyButton>
+            {/* <MyButton variant="contained" onClick={() => { this.componentDidMount("pubg"); }}>PUBG</MyButton> */}
+            {/* <MyButton variant="contained" onClick={() => { this.componentDidMount("starcraft2"); }}>SC2</MyButton> */}
+            <MyButton variant="contained" onClick={() => { this.componentDidMount("rocketleague"); game = "Rocket League"; }}>Rocket League</MyButton>
+            <MyButton variant="contained" onClick={() => { this.componentDidMount("valorant"); game = "Valorant";}}>Valorant</MyButton>
+            <MyButton variant="contained" onClick={() => { this.componentDidMount("rainbowsix"); game = "R6S";}}>R6S</MyButton>
+            {/* <MyButton variant="contained" onClick={() => { this.componentDidMount("apexlegends"); }}>Apex Legends</MyButton> */}
+            <MyButton variant="contained" onClick={() => { this.componentDidMount("leagueoflegends"); game = "LoL"; }}>LoL</MyButton>
           </Toolbar>
           <p>
-            Did Team Liquid Win?
+            Did Team Liquid {game} Win?
           </p>
           <p className = "won">
             {status}
           </p>
           <a
             className="App-link"
-            href="https://reactjs.org"
+            href={this.state.link}
             target="_blank"
             rel="noopener noreferrer"
           >
