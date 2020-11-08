@@ -6,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 
 const MyButton = styled(Button)({
-  background: '#0C223F',
+  background: '#153A6B',
   border: 0,
   borderRadius: 3,
   color: 'white',
@@ -38,13 +38,12 @@ class App extends Component {
   };
 
   async componentDidMount(game) {
-    axios.get('/data/' + game ).then((res) => {
-      newstate = res.data.result[0]
-      this.setState(newstate)
-      //this.state.link = "https://liquipedia.net/" + this.state.wiki + "/" + this.state.pagename;
-      console.log(this.state)
-    })
-    //eventLink = "https://liquipedia.net/" + this.state.wiki + "/" + this.state.pagename;
+    if (game != null) {
+      axios.get('/data/' + game ).then((res) => {
+        newstate = res.data.result[0]
+        this.setState(newstate)
+      })
+    } 
   }
 
   render() {

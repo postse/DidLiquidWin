@@ -48,6 +48,8 @@ async function callAPI(game) {
         }
     });
     const json = await response.json();
-    json.result[0].link = "https://liquipedia.net/" + json.result[0].wiki + "/" + json.result[0].pagename;
+    if (json.result[0] != null) {
+        json.result[0].link = "https://liquipedia.net/" + json.result[0].wiki + "/" + json.result[0].pagename;
+    }
     return json;
 }
