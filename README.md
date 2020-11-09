@@ -1,3 +1,5 @@
+##Update: This won "Best use of Liquipedia API" for the LiquidHacks Hackathon
+
 # Did Liquid Win?
 
 Imagine that you’re coming home from a long day of work, and you want to see if your favorite Liquid team won without having to scroll through Twitter and go through a website like HLTV. Or maybe you’re just a hardcore Liquid fan who wants to see how the Liquid teams are doing in the esports you’re a little less familiar with. Whatever the case may be, our website answers a simple but practical question - Did Liquid Win? It’s a question that fans like us ask frequently, and one that our project answers as quickly as possible.
