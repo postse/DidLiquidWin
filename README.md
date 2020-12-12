@@ -1,4 +1,4 @@
-## Update: This won "Best use of Liquipedia API" for the LiquidHacks Hackathon!
+## Update: This won "Best use of Liquipedia API" for the LiquidHacks Hackathon! :D
 
 # Did Liquid Win?
 
